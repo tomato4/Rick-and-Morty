@@ -2,10 +2,26 @@ package cz.ackee.testtask.rm.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+object LightColors {
+    val AccentPrimary = Color(0xFF0000FF)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+    val backgroundPrimary = Color(0xFFF4F4F9)
+    val backgroundSecondary = Color(0xFFE7E7EC)
+    val backgroundTertiary = Color(0xFFFFFFFF)
+
+    val foregroundPrimary = Color(0xFF000000)
+    val foregroundSecondary = Color(0xFF666666)
+    val foregroundTertiary = Color(0xFFB3B3B3)
+}
+
+object DarkColors {
+    val AccentPrimary = Color(0xFF9595FE)
+
+    val backgroundPrimary = Color(0xFF181819)
+    val backgroundSecondary = Color(0xFF2E2E2F)
+    val backgroundTertiary = Color(0xFF474747)
+
+    val foregroundPrimary = Color(0xFFFFFFFF)
+    val foregroundSecondary = Color(0xFF8B8B8C)
+    val foregroundTertiary = Color(0xFF5D5D5E)
+}

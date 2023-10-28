@@ -16,32 +16,30 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = DarkColors.backgroundPrimary,
+    secondary = DarkColors.backgroundSecondary,
+    tertiary = DarkColors.backgroundTertiary,
+    onPrimary = DarkColors.foregroundPrimary,
+    onSecondary = DarkColors.foregroundSecondary,
+    onTertiary = DarkColors.foregroundTertiary,
+    surfaceTint = DarkColors.AccentPrimary
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = LightColors.backgroundPrimary,
+    secondary = LightColors.backgroundSecondary,
+    tertiary = LightColors.backgroundTertiary,
+    onPrimary = LightColors.foregroundPrimary,
+    onSecondary = LightColors.foregroundSecondary,
+    onTertiary = LightColors.foregroundTertiary,
+    surfaceTint = LightColors.AccentPrimary
 )
 
 @Composable
 fun RickAndMortyTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false,
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
