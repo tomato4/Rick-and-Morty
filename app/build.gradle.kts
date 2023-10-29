@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -61,6 +63,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.4")
 //    implementation("io.coil-kt:coil:2.4.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+//    implementation("com.squareup.moshi:moshi:1.14.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
