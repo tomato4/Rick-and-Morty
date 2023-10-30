@@ -5,10 +5,13 @@ data class PaginationData<T>(
     val data: List<T> = emptyList(),
     val lastData: Response<List<T>> = Response.Success(emptyList()),
     val page: Int = 0,
-    val canPaginate: Boolean = true
+    val endReached: Boolean = false,
+    val loadMore: () -> Unit = {}
 ) {
+    val canPaginate = !endReached && lastData !is Response.Loading
+
     fun getNextPaginationData(): PaginationData<T> {
-        return if (!canPaginate) {
+        return if (endReached) {
             this
         } else if (lastData is Response.Error) {
             this.copy(lastData = Response.Loading)
@@ -16,4 +19,6 @@ data class PaginationData<T>(
             this.copy(lastData = Response.Loading, page = page + 1)
         }
     }
+
+    fun isLoadingPage() = lastData is Response.Loading
 }

@@ -13,7 +13,9 @@ import kotlinx.coroutines.launch
 class ListAllCharactersViewModel(
     private val getAllCharactersUseCase: GetAllCharactersUseCase
 ) : ViewModel() {
-    private val _data = mutableStateOf(PaginationData<Character>())
+    private val _data = mutableStateOf(PaginationData<Character>(
+        loadMore = this::loadMore
+    ))
     val paginationDataState: State<PaginationData<Character>> get() = _data
 
     init {
@@ -32,7 +34,8 @@ class ListAllCharactersViewModel(
                 _data.value = when (it) {
                     is Response.Success -> _data.value.copy(
                         data = _data.value.data + it.data,
-                        lastData = it
+                        lastData = it,
+                        endReached = it.data.isEmpty()
                     )
                     is Response.Loading, is Response.Error -> _data.value.copy(
                         lastData = it

@@ -13,7 +13,7 @@ fun CharactersListScreen(
     val viewModel = koinViewModel<ListAllCharactersViewModel>()
 
     CharactersListScreenImpl(
-        characters = viewModel.paginationDataState.value.data,
+        charactersPagination = viewModel.paginationDataState.value,
         onClick = {
             navController.navigate(
                 NavigationScreen.DetailScreen.route

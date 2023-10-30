@@ -24,6 +24,11 @@ class AllCharactersRepositoryImpl(
             .getCharacters(page)
             .execute()
 
+        if (response.code() == 404) {
+            emit(Response.Success(emptyList()))
+            return@flow
+        }
+
         val responseData = response.body()
 
         if (responseData == null) {

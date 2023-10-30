@@ -1,7 +1,7 @@
 package cz.ackee.testtask.rm.app.common
 
 sealed class Response<out T> {
-//    object Unknown: Response<Nothing>()
+//    object Unknown: Response<Nothing>() TODO delete
     object Loading: Response<Nothing>()
 
     data class Success<T> (
