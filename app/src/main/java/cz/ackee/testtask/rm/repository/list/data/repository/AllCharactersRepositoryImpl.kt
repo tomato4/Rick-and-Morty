@@ -6,8 +6,10 @@ import cz.ackee.testtask.rm.app.common.UiText
 import cz.ackee.testtask.rm.repository.list.data.mapper.toDomain
 import cz.ackee.testtask.rm.repository.list.domain.repository.AllCharactersRepository
 import cz.ackee.testtask.rm.repository.list.domain.repository.CharactersResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.Retrofit
 import timber.log.Timber
 
@@ -21,6 +23,7 @@ class AllCharactersRepositoryImpl(
             .create(CharactersListApi::class.java)
             .getCharacters(page)
             .execute()
+
         val responseData = response.body()
 
         if (responseData == null) {
@@ -32,5 +35,5 @@ class AllCharactersRepositoryImpl(
         }
 
         emit(Response.Success(responseData.results.toDomain()))
-    }
+    }.flowOn(Dispatchers.IO)
 }
