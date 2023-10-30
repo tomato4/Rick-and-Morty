@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cz.ackee.testtask.rm.repository.common.model.Character
+import cz.ackee.testtask.rm.ui.theme.RickAndMortyTheme
 
 @Composable
 fun CharactersList(
@@ -22,6 +23,7 @@ fun CharactersList(
             .fillMaxWidth()
             .then(modifier)
     ) {
+
         items(
             items = characters
         ) {

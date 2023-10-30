@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.ir.backend.js.compile
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -68,6 +66,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 //    implementation("com.squareup.moshi:moshi:1.14.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    val paging3Version = "3.2.1"
+    implementation("androidx.paging:paging-runtime-ktx:$paging3Version")
+    implementation("androidx.paging:paging-compose:$paging3Version")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

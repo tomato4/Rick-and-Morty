@@ -31,6 +31,6 @@ object Module {
         single<AllCharactersRepository> { AllCharactersRepositoryImpl(rickMortyApiRetrofit) }
         single<GetAllCharactersUseCase> { GetAllCharactersUseCaseImpl(get()) }
 
-        viewModel { ListAllCharactersViewModel(get()) }
+        viewModel { ListAllCharactersViewModel() }
     }
 }

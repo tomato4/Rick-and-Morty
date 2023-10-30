@@ -1,10 +1,13 @@
 package cz.ackee.testtask.rm.feature.list.presentation
 
 import androidx.lifecycle.ViewModel
-import cz.ackee.testtask.rm.repository.list.domain.usecase.GetAllCharactersUseCase
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.cachedIn
+import cz.ackee.testtask.rm.repository.common.model.Character
 
 class ListAllCharactersViewModel(
-    private val getAllCharactersUseCase: GetAllCharactersUseCase
+    private val pager: Pager<Int, Character>
 ) : ViewModel() {
-
+    val characterFlow = pager.flow.cachedIn(viewModelScope)
 }
