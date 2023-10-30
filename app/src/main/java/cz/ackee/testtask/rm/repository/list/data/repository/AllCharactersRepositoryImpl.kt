@@ -31,6 +31,6 @@ class AllCharactersRepositoryImpl(
             return@flow
         }
 
-        emit(Response.Success(responseData.toDomain()))
+        emit(Response.Success(responseData.results.toDomain()))
     }
 }

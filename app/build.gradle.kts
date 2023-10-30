@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.ir.backend.js.compile
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -23,6 +22,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -64,9 +72,11 @@ dependencies {
 //    implementation("io.coil-kt:coil:2.4.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-//    implementation("com.squareup.moshi:moshi:1.14.0")
+    implementation("com.squareup.moshi:moshi:1.14.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     testImplementation("junit:junit:4.13.2")

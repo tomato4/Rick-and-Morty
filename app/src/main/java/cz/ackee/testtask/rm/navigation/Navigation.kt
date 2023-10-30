@@ -19,5 +19,8 @@ fun Navigation() {
                 navController = navController
             )
         }
+        composable(NavigationScreen.DetailScreen.route) {
+
+        }
     }
 }
