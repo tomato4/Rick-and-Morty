@@ -6,7 +6,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import cz.ackee.testtask.rm.app.common.PaginationData
-import cz.ackee.testtask.rm.app.common.Response
 import cz.ackee.testtask.rm.repository.common.model.Character
 
 @Composable

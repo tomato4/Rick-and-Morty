@@ -1,7 +1,6 @@
 package cz.ackee.testtask.rm.repository.common.data.model
 
 import com.squareup.moshi.JsonClass
-import java.time.LocalDateTime
 
 @JsonClass(generateAdapter = true)
 data class CharacterDto(
