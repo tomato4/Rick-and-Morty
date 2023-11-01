@@ -11,4 +11,13 @@ sealed class Response<out T> {
     data class Error(
         val error: UiText
     ): Response<Nothing>()
+
+    fun getSuccessData(): T? {
+        return if (this is Success) {
+            data
+        } else {
+            null
+        }
+    }
+
 }

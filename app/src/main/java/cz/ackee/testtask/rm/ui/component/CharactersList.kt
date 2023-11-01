@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cz.ackee.testtask.rm.app.common.PaginationData
 import cz.ackee.testtask.rm.repository.common.model.Character
+import cz.ackee.testtask.rm.ui.theme.RickAndMortyTheme
 
 @Composable
 fun CharactersList(
@@ -68,23 +69,25 @@ fun CharactersList(
 @Composable
 @Preview
 fun CharactersListPreview() {
-    CharactersList(
-        charactersPagination = PaginationData(
-            data = List(10) {
-                Character(
-                    id = it,
-                    name = "Rick Sanchez",
-                    status = "Alive",
-                    species = "Human",
-                    type = null,
-                    gender = "Male",
-                    origin = "Earth (C-137)",
-                    location = "Citadel of Ricks",
-                    imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                    favorite = true
-                )
-            }
-        ),
-        onClick = {},
-    )
+    RickAndMortyTheme {
+        CharactersList(
+            charactersPagination = PaginationData(
+                data = List(10) {
+                    Character(
+                        id = it,
+                        name = "Rick Sanchez",
+                        status = "Alive",
+                        species = "Human",
+                        type = null,
+                        gender = "Male",
+                        origin = "Earth (C-137)",
+                        location = "Citadel of Ricks",
+                        imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                        favorite = true
+                    )
+                }
+            ),
+            onClick = {},
+        )
+    }
 }

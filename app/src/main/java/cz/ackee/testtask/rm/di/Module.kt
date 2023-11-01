@@ -1,9 +1,12 @@
 package cz.ackee.testtask.rm.di
 
 import cz.ackee.testtask.rm.app.Variables
+import cz.ackee.testtask.rm.feature.detail.presentation.CharacterDetailViewModel
 import cz.ackee.testtask.rm.feature.list.presentation.ListAllCharactersViewModel
-import cz.ackee.testtask.rm.repository.list.data.repository.AllCharactersRepositoryImpl
-import cz.ackee.testtask.rm.repository.list.domain.repository.AllCharactersRepository
+import cz.ackee.testtask.rm.repository.common.data.repository.CharactersRepositoryImpl
+import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersRepository
+import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCase
+import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCaseImpl
 import cz.ackee.testtask.rm.repository.list.domain.usecase.GetAllCharactersUseCase
 import cz.ackee.testtask.rm.repository.list.domain.usecase.GetAllCharactersUseCaseImpl
 import okhttp3.OkHttpClient
@@ -28,9 +31,15 @@ object Module {
         .build()
 
     val listModule = module {
-        single<AllCharactersRepository> { AllCharactersRepositoryImpl(rickMortyApiRetrofit) }
+        single<CharactersRepository> { CharactersRepositoryImpl(rickMortyApiRetrofit) }
         single<GetAllCharactersUseCase> { GetAllCharactersUseCaseImpl(get()) }
 
         viewModel { ListAllCharactersViewModel(get()) }
+    }
+
+    val detailModule = module {
+        single<GetCharacterDetailUseCase> { GetCharacterDetailUseCaseImpl(get()) }
+
+        viewModel { CharacterDetailViewModel(get(), it[0]) }
     }
 }

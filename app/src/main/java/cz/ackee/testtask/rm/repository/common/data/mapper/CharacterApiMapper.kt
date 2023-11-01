@@ -1,4 +1,4 @@
-package cz.ackee.testtask.rm.repository.list.data.mapper
+package cz.ackee.testtask.rm.repository.common.data.mapper
 
 import cz.ackee.testtask.rm.repository.common.data.model.CharacterDto
 import cz.ackee.testtask.rm.repository.common.model.Character

@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import cz.ackee.testtask.rm.R
 import cz.ackee.testtask.rm.repository.common.model.Character
+import cz.ackee.testtask.rm.ui.theme.RickAndMortyTheme
 
 @Composable
 fun CharactersListItem(
@@ -47,7 +49,9 @@ fun CharactersListItem(
                 model = character.imageUrl,
                 contentDescription = character.name,
                 filterQuality = FilterQuality.None,
+                placeholder = painterResource(R.drawable.ic_character),
                 modifier = Modifier
+                    .fillMaxHeight()
                     .clip(MaterialTheme.shapes.small)
             )
 
@@ -64,7 +68,7 @@ fun CharactersListItem(
                     )
                     Icon(
                         painter = painterResource(R.drawable.ic_star),
-                        contentDescription = stringResource(R.string.favorite),
+                        contentDescription = stringResource(R.string.alt_favorite),
                         tint = MaterialTheme.colorScheme.surfaceTint,
                         modifier = Modifier
                             .size(24.dp)
@@ -84,19 +88,21 @@ fun CharactersListItem(
 @Composable
 @Preview
 fun CharactersListItemPreview() {
-    CharactersListItem(
-        character = Character(
-            id = 0,
-            name = "Rick Sanchez",
-            status = "Alive",
-            species = "Human",
-            type = null,
-            gender = "Male",
-            origin = "Earth (C-137)",
-            location = "Citadel of Ricks",
-            imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-            favorite = true
-        ),
-        onClick = {}
-    )
+    RickAndMortyTheme {
+        CharactersListItem(
+            character = Character(
+                id = 0,
+                name = "Rick Sanchez",
+                status = "Alive",
+                species = "Human",
+                type = null,
+                gender = "Male",
+                origin = "Earth (C-137)",
+                location = "Citadel of Ricks",
+                imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                favorite = true
+            ),
+            onClick = {}
+        )
+    }
 }
