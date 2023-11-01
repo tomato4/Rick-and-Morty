@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Rick and Morty</string>
 
+    <string name="error">Error occurred</string>
     <string name="rm_api_error">Error occurred while fetching data.</string>
 
     <string name="title_characters">Characters</string>
@@ -10,7 +11,6 @@
 
     <string name="alt_favorite">Favorite</string>
     <string name="title_favorites">Favorites</string>
-    <string name="error">Error occurred</string>
     <string name="detail_screen_name">Name</string>
     <string name="detail_screen_status">Status</string>
     <string name="detail_screen_species">Species</string>

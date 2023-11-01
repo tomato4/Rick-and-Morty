@@ -22,18 +22,16 @@ import cz.ackee.testtask.rm.ui.theme.RickAndMortyTheme
 @Composable
 fun CharactersList(
     charactersPagination: PaginationData<Character>,
-    onClick: (Character) -> Unit,
-    modifier: Modifier = Modifier
+    onClick: (Character) -> Unit
 ) {
     val lazyListState = rememberLazyListState()
 
     LazyColumn(
         state = lazyListState,
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(vertical = 8.dp),
+        contentPadding = PaddingValues(8.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .then(modifier)
     ) {
         items(
             items = charactersPagination.data

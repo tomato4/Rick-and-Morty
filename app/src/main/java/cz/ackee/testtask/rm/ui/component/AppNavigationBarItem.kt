@@ -35,8 +35,8 @@ fun RowScope.AppNavigationBarItem(
             selectedIconColor = MaterialTheme.colorScheme.surfaceTint,
             selectedTextColor = MaterialTheme.colorScheme.surfaceTint,
             indicatorColor = MaterialTheme.colorScheme.primary,
-            unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-            unselectedTextColor = MaterialTheme.colorScheme.tertiary
+            unselectedIconColor = MaterialTheme.colorScheme.onTertiary,
+            unselectedTextColor = MaterialTheme.colorScheme.onTertiary
         ),
         onClick = if (!selected) { { navController.navigate(navigationScreen.route) } } else { {} }
     )

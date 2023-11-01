@@ -20,23 +20,25 @@ class CharactersRepositoryImpl(
     override fun getAllCharacters(page: Int, name: String?): Flow<CharactersResponse> = flow{
         emit(Response.Loading)
 
-        val response = retrofit
-            .create(CharactersListApi::class.java)
-            .getCharacters(page)
-            .execute()
+        val response = runCatching {
+            retrofit
+                .create(CharactersListApi::class.java)
+                .getCharacters(page)
+                .execute()
+        }.getOrNull()
 
-        if (response.code() == 404) {
-            emit(Response.Success(emptyList()))
-            return@flow
-        }
-
-        val responseData = response.body()
+        val responseData = response?.body()
 
         if (responseData == null) {
             emit(Response.Error(
                 UiText.StringResource(R.string.rm_api_error)
             ))
-            Timber.e("Failed to fetch data from RM api. Message: ${response.errorBody().toString()}")
+            Timber.e("Failed to fetch data from RM api. Message: ${response?.errorBody().toString()}")
+            return@flow
+        }
+
+        if (response.code() == 404) {
+            emit(Response.Success(emptyList()))
             return@flow
         }
 
@@ -46,18 +48,20 @@ class CharactersRepositoryImpl(
     override fun getSelectedCharacters(ids: List<Int>): Flow<CharactersResponse> = flow {
         emit(Response.Loading)
 
-        val response = retrofit
-            .create(CharactersListApi::class.java)
-            .getSelectedCharacters(ids)
-            .execute()
+        val response = runCatching {
+            retrofit
+                .create(CharactersListApi::class.java)
+                .getSelectedCharacters(ids)
+                .execute()
+        }.getOrNull()
 
-        val responseData = response.body()
+        val responseData = response?.body()
 
         if (responseData == null) {
             emit(Response.Error(
                 UiText.StringResource(R.string.rm_api_error)
             ))
-            Timber.e("Failed to fetch data from RM api. Message: ${response.errorBody().toString()}")
+            Timber.e("Failed to fetch data from RM api. Message: ${response?.errorBody().toString()}")
             return@flow
         }
         emit(Response.Success(responseData.toDomain()))
@@ -66,18 +70,20 @@ class CharactersRepositoryImpl(
     override fun getCharacter(id: Int): Flow<CharacterResponse> = flow {
         emit(Response.Loading)
 
-        val response = retrofit
-            .create(CharactersListApi::class.java)
-            .getCharacter(id)
-            .execute()
+        val response = runCatching {
+            retrofit
+                .create(CharactersListApi::class.java)
+                .getCharacter(id)
+                .execute()
+        }.getOrNull()
 
-        val responseData = response.body()
+        val responseData = response?.body()
 
         if (responseData == null) {
             emit(Response.Error(
                 UiText.StringResource(R.string.rm_api_error)
             ))
-            Timber.e("Failed to fetch data from RM api. Message: ${response.errorBody().toString()}")
+            Timber.e("Failed to fetch data from RM api. Message: ${response?.errorBody().toString()}")
             return@flow
         }
         emit(Response.Success(responseData.toDomain()))

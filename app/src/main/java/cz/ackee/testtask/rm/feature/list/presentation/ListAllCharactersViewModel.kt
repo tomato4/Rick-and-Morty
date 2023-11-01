@@ -14,15 +14,11 @@ class ListAllCharactersViewModel(
     private val getAllCharactersUseCase: GetAllCharactersUseCase
 ) : ViewModel() {
     private val _data = mutableStateOf(PaginationData<Character>(
-        loadMore = this::loadMore
+        loadMore = this::onLoadMore
     ))
     val paginationDataState: State<PaginationData<Character>> get() = _data
 
-    init {
-        loadMore()
-    }
-
-    fun loadMore() {
+    fun onLoadMore() {
         if (!_data.value.canPaginate) {
             return
         }
