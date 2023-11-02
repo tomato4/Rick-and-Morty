@@ -1,6 +1,7 @@
 package cz.ackee.testtask.rm.ui.component
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -29,10 +30,12 @@ fun AppScaffold(
     navController: NavController,
     showBackButton: Boolean = false,
     showNavigation: Boolean = true,
+    topBar: (@Composable () -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
     content: @Composable () -> Unit
 ) {
     Scaffold(
-        topBar = {
+        topBar = if (topBar == null) {{
             TopAppBar(
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -56,10 +59,11 @@ fun AppScaffold(
                         )
                     }
                 }} else {{}},
+                actions = actions,
                 modifier = Modifier
                     .shadow(8.dp)
             )
-        },
+        }} else {topBar},
         bottomBar = if (showNavigation) {{
             AppNavigationBar(navController = navController)
         }} else {{}}

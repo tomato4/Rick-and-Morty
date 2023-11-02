@@ -16,7 +16,9 @@ fun PaginationHandler(
     val shouldStartPaginate = remember {
         derivedStateOf {
             !paginationData.endReached
-                    && (state.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -10) >= (state.layoutInfo.totalItemsCount - 1)
+//                    && paginationData.data.isNotEmpty()
+                    && state.layoutInfo.visibleItemsInfo.lastOrNull()?.index != 0
+                    && (state.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -10) >= (state.layoutInfo.totalItemsCount - 2)
         }
     }
 

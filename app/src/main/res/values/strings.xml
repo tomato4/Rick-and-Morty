@@ -19,4 +19,7 @@
     <string name="detail_screen_origin">Origin</string>
     <string name="detail_screen_location">Location</string>
     <string name="alt_back">Back</string>
+    <string name="alt_search">Search</string>
+    <string name="list_screen_search_placeholder">Search characters</string>
+    <string name="alt_clear">Clear</string>
 </resources>

@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 class GetAllCharactersUseCaseImpl(
     private val charactersRepository: CharactersRepository
 ) : GetAllCharactersUseCase {
-    override fun invoke(page: Int): Flow<CharactersResponse> =
-        charactersRepository.getAllCharacters(page)
+    override fun invoke(page: Int, searchName: String?): Flow<CharactersResponse> =
+        charactersRepository.getAllCharacters(page, searchName)
 }

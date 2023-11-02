@@ -109,11 +109,13 @@ fun DetailScreenImpl(
             }
         }
     } else {
-        Box {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             CircularProgressIndicator(
                 color = MaterialTheme.colorScheme.surfaceTint,
                 modifier = Modifier
-                    .fillMaxSize()
                     .align(Alignment.Center)
             )
         }

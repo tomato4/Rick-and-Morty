@@ -2,7 +2,7 @@ package cz.ackee.testtask.rm.di
 
 import cz.ackee.testtask.rm.app.Variables
 import cz.ackee.testtask.rm.feature.detail.presentation.CharacterDetailViewModel
-import cz.ackee.testtask.rm.feature.list.presentation.ListAllCharactersViewModel
+import cz.ackee.testtask.rm.feature.list.presentation.AllCharactersViewModel
 import cz.ackee.testtask.rm.repository.common.data.repository.CharactersRepositoryImpl
 import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersRepository
 import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCase
@@ -34,7 +34,7 @@ object Module {
         single<CharactersRepository> { CharactersRepositoryImpl(rickMortyApiRetrofit) }
         single<GetAllCharactersUseCase> { GetAllCharactersUseCaseImpl(get()) }
 
-        viewModel { ListAllCharactersViewModel(get()) }
+        viewModel { AllCharactersViewModel(get()) }
     }
 
     val detailModule = module {

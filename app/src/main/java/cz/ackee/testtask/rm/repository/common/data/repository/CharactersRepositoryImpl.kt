@@ -23,22 +23,22 @@ class CharactersRepositoryImpl(
         val response = runCatching {
             retrofit
                 .create(CharactersListApi::class.java)
-                .getCharacters(page)
+                .getCharacters(page, name)
                 .execute()
         }.getOrNull()
 
         val responseData = response?.body()
 
-        if (responseData == null) {
+        if (response == null || responseData == null) {
+            if (response != null && response.code() == 404) {
+                emit(Response.Success(emptyList()))
+                return@flow
+            }
+
             emit(Response.Error(
                 UiText.StringResource(R.string.rm_api_error)
             ))
-            Timber.e("Failed to fetch data from RM api. Message: ${response?.errorBody().toString()}")
-            return@flow
-        }
-
-        if (response.code() == 404) {
-            emit(Response.Success(emptyList()))
+            Timber.e("Failed to fetch data from RM api.")
             return@flow
         }
 
