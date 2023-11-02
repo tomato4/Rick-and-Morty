@@ -4,5 +4,5 @@ import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersRespon
 import kotlinx.coroutines.flow.Flow
 
 interface GetFavoriteCharactersUseCase {
-    operator fun invoke(): Flow<CharactersResponse>
+    operator fun invoke(page: Int): Flow<CharactersResponse>
 }

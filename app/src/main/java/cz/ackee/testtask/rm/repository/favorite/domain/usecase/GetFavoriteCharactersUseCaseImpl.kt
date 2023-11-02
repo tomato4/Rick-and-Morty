@@ -1,12 +1,12 @@
 package cz.ackee.testtask.rm.repository.favorite.domain.usecase
 
-import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersRepository
 import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersResponse
+import cz.ackee.testtask.rm.repository.favorite.domain.repository.FavoriteCharacterRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetFavoriteCharactersUseCaseImpl(
-    private val charactersRepository: CharactersRepository
+    private val favoriteCharacterRepository: FavoriteCharacterRepository
 ) : GetFavoriteCharactersUseCase {
-    override fun invoke(): Flow<CharactersResponse> =
-        charactersRepository.getSelectedCharacters(listOf(5, 10)) // TODO Implement
+    override fun invoke(page: Int): Flow<CharactersResponse> =
+        favoriteCharacterRepository.getCharacters(page)
 }

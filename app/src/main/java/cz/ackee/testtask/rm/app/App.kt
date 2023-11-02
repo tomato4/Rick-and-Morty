@@ -16,7 +16,8 @@ class App : Application() {
             androidContext(this@App)
             modules(
                 Module.listModule,
-                Module.detailModule
+                Module.detailModule,
+                Module.favoriteModule
             )
         }
     }

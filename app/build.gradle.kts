@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -40,17 +41,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "19"
+        jvmTarget = "18"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
     packaging {
         resources {
@@ -78,6 +79,12 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.15.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    val roomVersion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+//    ksp("androidx.room:room-compiler:$roomVersion") does not work
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

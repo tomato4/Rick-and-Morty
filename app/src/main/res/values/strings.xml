@@ -22,4 +22,6 @@
     <string name="alt_search">Search</string>
     <string name="list_screen_search_placeholder">Search characters</string>
     <string name="alt_clear">Clear</string>
+    <string name="alt_unlike">Unlike</string>
+    <string name="alt_like">Like</string>
 </resources>

@@ -10,10 +10,12 @@ import cz.ackee.testtask.rm.app.common.Response
 import cz.ackee.testtask.rm.app.common.UiText
 import cz.ackee.testtask.rm.repository.common.domain.repository.CharacterResponse
 import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCase
+import cz.ackee.testtask.rm.repository.favorite.domain.usecase.ChangeCharacterFavUseCase
 import kotlinx.coroutines.launch
 
 class CharacterDetailViewModel(
     private val getCharacterDetailUseCase: GetCharacterDetailUseCase,
+    private val changeCharacterFavUseCase: ChangeCharacterFavUseCase,
     private val characterId: Int?
 ) : ViewModel() {
     private val _characterResponseState: MutableState<CharacterResponse> =
@@ -31,6 +33,20 @@ class CharacterDetailViewModel(
         viewModelScope.launch {
             getCharacterDetailUseCase(characterId).collect {
                 _characterResponseState.value = it
+            }
+        }
+    }
+
+    fun changeLike(favorite: Boolean) {
+        val character = _characterResponseState.value.getSuccessData() ?: return
+
+        viewModelScope.launch {
+            changeCharacterFavUseCase(character, favorite).collect {
+                if (it is Response.Success) {
+                    _characterResponseState.value = Response.Success(
+                        character.copy(favorite = favorite)
+                    )
+                }
             }
         }
     }

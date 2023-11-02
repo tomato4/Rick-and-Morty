@@ -1,15 +1,25 @@
 package cz.ackee.testtask.rm.di
 
+import androidx.room.Room
 import cz.ackee.testtask.rm.app.Variables
 import cz.ackee.testtask.rm.feature.detail.presentation.CharacterDetailViewModel
+import cz.ackee.testtask.rm.feature.favorite.presentation.FavoriteCharactersViewModel
 import cz.ackee.testtask.rm.feature.list.presentation.AllCharactersViewModel
 import cz.ackee.testtask.rm.repository.common.data.repository.CharactersRepositoryImpl
 import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersRepository
 import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCase
 import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCaseImpl
+import cz.ackee.testtask.rm.repository.favorite.data.database.FavoriteCharacterDatabaseImpl
+import cz.ackee.testtask.rm.repository.favorite.data.repository.FavoriteCharacterRepositoryImpl
+import cz.ackee.testtask.rm.repository.favorite.domain.repository.FavoriteCharacterRepository
+import cz.ackee.testtask.rm.repository.favorite.domain.usecase.ChangeCharacterFavUseCase
+import cz.ackee.testtask.rm.repository.favorite.domain.usecase.ChangeCharacterFavUseCaseImpl
+import cz.ackee.testtask.rm.repository.favorite.domain.usecase.GetFavoriteCharactersUseCase
+import cz.ackee.testtask.rm.repository.favorite.domain.usecase.GetFavoriteCharactersUseCaseImpl
 import cz.ackee.testtask.rm.repository.list.domain.usecase.GetAllCharactersUseCase
 import cz.ackee.testtask.rm.repository.list.domain.usecase.GetAllCharactersUseCaseImpl
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -40,6 +50,27 @@ object Module {
     val detailModule = module {
         single<GetCharacterDetailUseCase> { GetCharacterDetailUseCaseImpl(get()) }
 
-        viewModel { CharacterDetailViewModel(get(), it[0]) }
+        viewModel { CharacterDetailViewModel(get(), get(), it[0]) }
+    }
+
+    val favoriteModule = module {
+        single<GetFavoriteCharactersUseCase> { GetFavoriteCharactersUseCaseImpl(get()) }
+        single<ChangeCharacterFavUseCase> { ChangeCharacterFavUseCaseImpl(get()) }
+
+//        single<FavoriteCharacterDatabase> {
+//            Room.databaseBuilder(
+//                context = androidContext(),
+//                klass = FavoriteCharacterDatabaseImpl::class.java,
+//                name = Variables.DB_NAME
+//            ).build()
+//        }
+
+        single<FavoriteCharacterRepository> { FavoriteCharacterRepositoryImpl(Room.databaseBuilder(
+            context = androidContext(),
+            klass = FavoriteCharacterDatabaseImpl::class.java,
+            name = Variables.DB_NAME
+        ).build()) }
+
+        viewModel { FavoriteCharactersViewModel(get()) }
     }
 }
