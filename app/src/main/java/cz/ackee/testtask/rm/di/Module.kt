@@ -7,6 +7,8 @@ import cz.ackee.testtask.rm.feature.favorite.presentation.FavoriteCharactersView
 import cz.ackee.testtask.rm.feature.list.presentation.AllCharactersViewModel
 import cz.ackee.testtask.rm.repository.common.data.repository.CharactersRepositoryImpl
 import cz.ackee.testtask.rm.repository.common.domain.repository.CharactersRepository
+import cz.ackee.testtask.rm.repository.detail.domain.usecase.AreCharactersFavoriteUseCase
+import cz.ackee.testtask.rm.repository.detail.domain.usecase.AreCharactersFavoriteUseCaseImpl
 import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCase
 import cz.ackee.testtask.rm.repository.detail.domain.usecase.GetCharacterDetailUseCaseImpl
 import cz.ackee.testtask.rm.repository.favorite.data.database.FavoriteCharacterDatabaseImpl
@@ -42,13 +44,13 @@ object Module {
 
     val listModule = module {
         single<CharactersRepository> { CharactersRepositoryImpl(rickMortyApiRetrofit) }
-        single<GetAllCharactersUseCase> { GetAllCharactersUseCaseImpl(get()) }
+        single<GetAllCharactersUseCase> { GetAllCharactersUseCaseImpl(get(), get()) }
 
         viewModel { AllCharactersViewModel(get()) }
     }
 
     val detailModule = module {
-        single<GetCharacterDetailUseCase> { GetCharacterDetailUseCaseImpl(get()) }
+        single<GetCharacterDetailUseCase> { GetCharacterDetailUseCaseImpl(get(), get()) }
 
         viewModel { CharacterDetailViewModel(get(), get(), it[0]) }
     }
@@ -56,6 +58,7 @@ object Module {
     val favoriteModule = module {
         single<GetFavoriteCharactersUseCase> { GetFavoriteCharactersUseCaseImpl(get()) }
         single<ChangeCharacterFavUseCase> { ChangeCharacterFavUseCaseImpl(get()) }
+        single<AreCharactersFavoriteUseCase> { AreCharactersFavoriteUseCaseImpl(get()) }
 
 //        single<FavoriteCharacterDatabase> {
 //            Room.databaseBuilder(

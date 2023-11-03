@@ -36,12 +36,12 @@ class FavoriteCharacterRepositoryImpl(
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun areCharactersFavorite(characters: List<Int>): Flow<CharactersResponse> = flow {
+    override fun areCharactersFavorite(ids: List<Int>): Flow<CharactersResponse> = flow {
         emit(Response.Loading)
 
         try {
             val result = database.favoriteCharacterDao().getCharactersByIds(
-                ids = characters
+                ids = ids
             ).toDomain()
 
             emit(Response.Success(result))
@@ -64,7 +64,7 @@ class FavoriteCharacterRepositoryImpl(
             emit(Response.Error(UiText.StringResource(R.string.error)))
             Timber.e(e)
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun removeCharacter(character: Character): Flow<EmptyResponse> = flow {
         emit(Response.Loading)
@@ -79,5 +79,5 @@ class FavoriteCharacterRepositoryImpl(
             emit(Response.Error(UiText.StringResource(R.string.error)))
             Timber.e(e)
         }
-    }
+    }.flowOn(Dispatchers.IO)
 }

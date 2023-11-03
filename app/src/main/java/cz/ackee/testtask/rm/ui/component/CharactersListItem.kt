@@ -66,14 +66,17 @@ fun CharactersListItem(
                         color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.headlineSmall
                     )
-                    Icon(
-                        painter = painterResource(R.drawable.ic_star),
-                        contentDescription = stringResource(R.string.alt_favorite),
-                        tint = MaterialTheme.colorScheme.surfaceTint,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .padding(start = 4.dp)
-                    )
+
+                    if (character.favorite) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_star),
+                            contentDescription = stringResource(R.string.alt_favorite),
+                            tint = MaterialTheme.colorScheme.surfaceTint,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .padding(start = 4.dp)
+                        )
+                    }
                 }
                 Text(
                     text = character.status,
